@@ -1,0 +1,7 @@
+Parser
+	Handle encoding
+		Body
+		Subject
+
+Database
+	Delete messages no longer needed, because they are not in the inbox anymore
