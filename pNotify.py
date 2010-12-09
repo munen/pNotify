@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
+
 import dbus
 import pickle
 import imaplib
+import os
 import ConfigParser
 
 class Config:
@@ -14,7 +17,6 @@ class Config:
     self.imap_port   = config.get("IMAP", "IMAP_PORT")
     self.user        = config.get("IMAP", "USER")
     self.password    = config.get("IMAP", "PASSWORD")
-    self.db_path     = config.get("GENERAL", "DB_PATH")
 
 class pNotify(Config):
 
@@ -25,6 +27,10 @@ class pNotify(Config):
     """
     Config.__init__(self)
     try:
+      self.db_path = os.path.join(os.path.expanduser('~'), ".pNotify")
+      if not os.path.exists(self.db_path):
+        os.mkdir(self.db_path)
+      self.db_path = os.path.join(self.db_path, "previous_notifications.db")
       db_fp   =  open(self.db_path, 'rb')
       self.db = pickle.load(db_fp)
       db_fp.close()
@@ -94,7 +100,6 @@ class pNotify(Config):
       msg = "%s more new messages" % (len(mail_numbers)-2)
       knotify.event("warning", "kde", [], "pnotify info", msg, [], [], 0, 0,\
           dbus_interface="org.kde.KNotify")
-  
     
     self.saveNotifications(messages)
 
