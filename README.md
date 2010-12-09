@@ -9,7 +9,7 @@ with the authors, the subjects and the first message body lines. If there are
 more than two new messages in your inbox, pNotify will tell you how many more
 have arrived.
 
-Screenshot: http://dispatched.ch/pic/pnotify_screenshot.png
+[Screenshot](http://dispatched.ch/pic/pnotify_screenshot.png)
 
 Usage
 -----
